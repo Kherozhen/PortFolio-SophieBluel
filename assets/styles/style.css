@@ -55,6 +55,29 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+/* Rajout de la barre édition */
+
+.edition {
+	background-color: black;
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+}
+.edition a {
+	text-decoration: none;
+	color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.edition i {
+	color : white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+/* Fin de la barre édition */
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -129,9 +152,12 @@ a:focus {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+#portfolio {
+	position: relative;
+}
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 3em;
 }
 
 /* Rajout des boutons filtre*/

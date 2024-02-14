@@ -1,11 +1,9 @@
+// Séléctionner l'endroit où placer les boutons filtre, il faut le mettre a l'exterieur de la fonction sinon on ne peut pas l'utiliser pour autres choses
+
+const buttonFiltre = document.querySelector(".buttonFiltre");
 
 // Fonction pour créer les éléments (id et names)
 function createCategories(categories) {
-
-  // Séléctionner l'endroit où placer les boutons filtre
-
-  const buttonFiltre = document.querySelector(".buttonFiltre");
-
 
   // Création bouton "Tous"
 
@@ -43,7 +41,7 @@ function createCategories(categories) {
       gallery.innerHTML = "";
       return createElements(response);
     })
-
-
 }
+
+
 
