@@ -20,29 +20,27 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-.modalImg {
-	background-color: #FFFFFF;
-	margin: 15% auto;
-	width: 630px; 
-	height: 688px;
-	border-radius: 10px;
-	text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .modal h3 {
 	font-size: 26px;
-	padding-top: 50px;
+}
+.modalImg {
+	background-color: #FFFFFF;
+    padding: 30px;
+	margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+	width: 630px; 
+	border-radius: 10px;
+	text-align: center;
+    position: relative;
 }
 .modal .modalImg .closeModal {
 	color: #aaa;
-	float: right;
 	font-size: 28px;
-	font-weight: bold;
-	padding-top: 20px;
-	padding-right: 30px;
-
+    position: absolute;
+    right: 30px;
 }
 .modal .modalImg .closeModal:hover,
 .modal .modalImg .closeModal:focus {
@@ -53,6 +51,36 @@
 .modal .modalImg .gererImages {
     width: 70%;
     margin: auto;
+}
+.modal .modalImg .gererImages .galleryModal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.modal .modalImg .gererImages .galleryModal figure {
+    position: relative;
+}
+.modal .modalImg .gererImages .galleryModal img {
+    width: 76px;
+    height : 102px; 
+    padding-bottom: 20px;
+}
+
+.modal .modalImg .gererImages .galleryModal span {
+    cursor: pointer;
+    position : absolute;
+    top: 5px;
+    right: 10px;
+}
+.modal .modalImg .gererImages .galleryModal i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    color: white;
 }
 
 .modal .modalImg .gererImages button {
@@ -70,8 +98,7 @@
 
 .modal .modalImg .gererImages hr {
     border: 1px solid #B3B3B3;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     width: 100%;
 }
 
@@ -85,31 +112,42 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.5);
 }
 .modalPhoto h3 {
     font-size: 26px;
-	padding-top: 50px;
     padding-bottom: 20px;
 }
 
 .modalPhoto .modalAddPhoto {
     background-color: #FFFFFF;
-	margin: 15% auto;
+    padding: 30px;
+	margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
 	width: 630px; 
-	height: 688px;
 	border-radius: 10px;
 	text-align: center;
+    position: relative;
 }
 
+.modalPhoto .modalAddPhoto .return {
+    color: #aaa;
+	font-size: 20px;
+    position: absolute;
+    left: 30px;
+}
+.modalPhoto .modalAddPhoto .return:hover,
+.modalPhoto .modalAddPhoto .return:focus {
+    color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 .modalPhoto .modalAddPhoto .closeModalPhoto {
     color: #aaa;
-	float: right;
 	font-size: 28px;
-	font-weight: bold;
-	padding-top: 20px;
-	padding-right: 30px;
+    position: absolute;
+    right: 30px;
 }
 
 .modalPhoto .modalAddPhoto .closeModalPhoto:hover,
@@ -129,11 +167,14 @@
     flex-direction: column;
     padding: 20px;
     gap: 10px;
-
+    height: 170px;
 }
 .modalPhoto .modalAddPhoto .addPhoto .previewPhoto i {
     color: #CBD6DC;
     font-size: 76px;
+}
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto input {
+    display: none;
 }
 .modalPhoto .modalAddPhoto .addPhoto .previewPhoto button {
     cursor: pointer;
@@ -148,8 +189,15 @@
     border: none;
     border-radius: 25px;
 }
-.modalPhoto .modalAddPhoto .previewPhoto span {
+.modalPhoto .modalAddPhoto .addPhoto.previewPhoto span {
     font-size: 10px;
+}
+
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto img {
+    height: 100%;
+    object-fit: cover;
+    width: 30%;
+    align-self: center;
 }
 .modalPhoto .modalAddPhoto .addPhoto form {
     padding-top: 20px;
@@ -164,23 +212,26 @@
 .modalPhoto .modalAddPhoto .addPhoto form input,
 .modalPhoto .modalAddPhoto .addPhoto form select  {
     border: none;
+    cursor: pointer;
     height: 50px;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 .modalPhoto .modalAddPhoto .addPhoto form button {
-    cursor: pointer;
     width: 50%;
     align-self: center;
 	border: none;
     font-size: 14px;
     background-color: #1D6154;
+    cursor: pointer;
     color: white;
     margin-top: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 25px;
 }
-
+.modalPhoto .modalAddPhoto .addPhoto form .buttonNoActif {
+    background-color: #A7A7A7;
+}
 .modalPhoto .modalAddPhoto .addPhoto form hr {
     border: 1px solid #B3B3B3;
     margin-top: 50px;

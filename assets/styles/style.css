@@ -59,12 +59,17 @@ body {
 /* Rajout de la barre édition */
 
 .edition {
+	position : absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	background-color: black;
 	display: flex;
-	gap: 10px;
 	justify-content: center;
+	gap: 10px;
+	
 }
-.edition a {
+.edition p {
 	text-decoration: none;
 	color: white;
 	padding-top: 10px;

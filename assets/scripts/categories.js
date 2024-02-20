@@ -3,7 +3,7 @@
 const buttonFiltre = document.querySelector(".buttonFiltre");
 
 // Fonction pour créer les éléments (id et names)
-function createCategories(categories) {
+function categoriesAPI(categories) {
 
   // Création bouton "Tous"
 
@@ -24,7 +24,7 @@ function createCategories(categories) {
 
   // Mettre en place le filtre et le reset instantanée de la page
 
-  const btnFiltres = document.querySelectorAll(".buttonFiltre button[data-id]");  // Sélectionne les boutons qui vont servir de filtre
+  const btnFiltres = document.querySelectorAll(".buttonFiltre button[data-id]");  // Sélectionne les boutons filtre
 
   btnFiltres.forEach(button => {                                                  // Faire une boucle pour cibler tous les boutons
     button.addEventListener("click", () => {                                      // Faire en sorte que qqc se passe au click de la souris
@@ -33,15 +33,16 @@ function createCategories(categories) {
         return element.categoryId == btnId;                                       // "return" est pour avoir une réponse, "==" => veut dire "équivalent"
       })
       gallery.innerHTML = "";                                                     // => sert à reset la page toujours sans rechargement de la page
-      createElements(filtre);
+      elementsAPI(filtre);
     })
   })
 
     btnAll.addEventListener('click', () => {                                      // Permet de reset la page et de afficher tous les éléments sans chargement de la page
       gallery.innerHTML = "";
-      return createElements(response);
+      return elementsAPI(response);
     })
 }
 
-
-
+if(localStorage.getItem('token')) {
+  buttonFiltre.style.display = "none";
+}

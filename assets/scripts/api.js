@@ -1,6 +1,7 @@
 // On va appeler l'API pour les éléments photos et légendes
   
 let response;  // Il faut le mettre à part de la fonction "fetch" pour qu'on puisse l'utiliser dans d'autres fonctions
+let responseCategories;
 
 fetch("http://localhost:5678/api/works")
   .then(async (responseFetch) => {
@@ -12,14 +13,13 @@ fetch("http://localhost:5678/api/works")
     console.log(response);
 
     // Appel de la fonction pour créer les éléments à partir des données
-    createElements(response);
+    elementsAPI(response);
   })
   .catch(error => {
     console.error('Erreur images/textes');
   });
 
 
-  
 // appel de l'API pour les catégories
 
 fetch("http://localhost:5678/api/categories")
@@ -32,8 +32,10 @@ fetch("http://localhost:5678/api/categories")
     console.log(responseCategories);
 
     // Appel de la fonction pour créer les éléments à partir des données
-    createCategories(responseCategories);
+    categoriesAPI(responseCategories);
   })
   .catch(error => {
     console.error('Erreur categories');
   });
+
+

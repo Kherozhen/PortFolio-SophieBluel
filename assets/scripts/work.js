@@ -1,9 +1,10 @@
 
 // Sélectionnez l'endroit ou mettre les "elements"
 const gallery = document.querySelector (".gallery");
+const galleryModal = document.querySelector('.galleryModal');
 
 // Fonction pour créer les éléments (images et textes) à partir des données
-function createElements(elements) {                             // ATTENTION : createElements ici n'est pas la fonction
+function elementsAPI(elements) {
   
 // Création des éléments
 
@@ -25,13 +26,52 @@ elements.forEach(element => {
   titleElement.innerText = element.title;                       // Utilise le titre à partir des données
   figureElement.appendChild(titleElement);                      // On rattache à son parent
   
+
+  //copie dans la modal
+
+  // Création d'une balise dédiée à chaque image 
+   const figureElementModal = document.createElement("figure");
+
+  // On rattache la balise à son parent
+   galleryModal.appendChild(figureElementModal);
+ 
+  // Création de l'élément image
+   const imageElementModal = document.createElement("img");
+   imageElementModal.src = element.imageUrl;
+   imageElementModal.alt = element.title; 
+   figureElementModal.appendChild(imageElementModal);    
+   
+  // Creation de l'élément poubelle
+   const deleteElement = document.createElement("span");
+   deleteElement.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
+   figureElementModal.appendChild(deleteElement);
+
+  /*// Faire fonctionner l'élément poubelle
+    deleteElement.forEach(function (span) {
+      span.addEventListener('click', () => {
+        
+        /// Appel API 
+        fetch("http://localhost:5678/api/works{id}", {
+          method: 'DELETE',
+          headers: {
+              'Authorization': 'token'
+          }
+        })
+        .then(function (response) {
+          if (response.ok) {
+              // Si la suppression est réussie, cache l'élément d'image
+              span.parentElement.style.display = 'none';
+          } else {
+              console.error('Erreur suppression image', response.status);
+          }
+        })
+        .catch(function (error) {
+          console.error('Erreur demande suppression API', error);
+        });
+      })
+    })*/
+
+    
   });
-  
 }
-
-
-
-
-
-
 
