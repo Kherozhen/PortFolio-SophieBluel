@@ -3,22 +3,26 @@
 let response;  // Il faut le mettre à part de la fonction "fetch" pour qu'on puisse l'utiliser dans d'autres fonctions
 let responseCategories;
 
-fetch("http://localhost:5678/api/works")
-  .then(async (responseFetch) => {
-    if (!responseFetch.ok) {
-      throw new Error('La requête a échoué');
-    }
+function apiWorks() {
+  fetch("http://localhost:5678/api/works")
+    .then(async (responseFetch) => {
+      if (!responseFetch.ok) {
+        throw new Error('La requête a échoué');
+      }
 
-    response = await responseFetch.json();
-    console.log(response);
+      response = await responseFetch.json();
+      console.log(response);
 
-    // Appel de la fonction pour créer les éléments à partir des données
-    elementsAPI(response);
-  })
-  .catch(error => {
-    console.error('Erreur images/textes');
-  });
+      // Appel de la fonction pour créer les éléments à partir des données
+      elementsAPI(response);
+      addPhotoAPI();
+    })
+    .catch(error => {
+      console.error('Erreur images/textes');
+    });
+}
 
+apiWorks(); // Pourquoi le mettre seul ?
 
 // appel de l'API pour les catégories
 
