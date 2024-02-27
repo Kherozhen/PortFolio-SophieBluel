@@ -8,6 +8,12 @@ if(localStorage.getItem('token')){
   const loginLogout = document.querySelector('.loginLogout');
   loginLogout.textContent = 'logout';
 
+  // Deconnection
+  loginLogout.addEventListener('click', () => {
+    // Supprimez le token du localStorage
+    localStorage.removeItem('token');    
+  });
+
   // Ajout plusieurs balises, il faut les mettre à la suite 
   edition.innerHTML = '<i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p>';
   modifier.innerHTML = '<i class="fa-regular fa-pen-to-square"></i><a href="#">Modifier</a>';
