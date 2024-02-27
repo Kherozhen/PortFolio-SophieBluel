@@ -34,6 +34,54 @@ closeModal.addEventListener('click', () => {
   modal.style.display = 'none';
 });
 
+
+// Supprimer avec l'élément "poubelle"
+function trash() {
+  const imageElements = document.querySelectorAll('.figureModal img');
+
+  imageElements.forEach(imageElement => {
+    const figureElementModal = imageElement.closest('.figureModal'); // Chercher l'élément figureModal parent de l'image
+    const deleteElement = figureElementModal.querySelector('.deleteElement'); // Chercher deleteElement dans figureModal
+
+    deleteElement.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // récupérer l'id de l'image
+      const id = imageElement.dataset.id;
+
+      // récupérer les différents éléments pour fetch et la réinitialition de la page
+      const gallery = document.querySelector(".gallerie");
+      const galleryModal = document.querySelector('.galleryModal');
+      const token = localStorage.getItem('token');
+      
+
+      fetch(`http://localhost:5678/api/works/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Erreur de suppression');
+        }
+        // Pas besoin de réponse, Delete n'en renvoit pas
+      })
+      .then(() => {
+        // Supprimer l'élément .figureModal parent de l'image
+        imageElement.closest('.figureModal').remove();
+        gallery.innerHTML = "";
+        galleryModal.innerHTML = "";
+        apiWorks(); // fait appel aux images de l'api
+      })
+      .catch((error) => {
+        console.error('Erreur :', error);
+      });
+    });
+  });
+}
+
+
 ///////////////////////////////
 
 // Ouverture de la seconde modal: "ajout photo"
@@ -159,7 +207,7 @@ function addPhotoAPI() {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
-    },
+      },
     body: formModal,
     })
     .then((Response) => {
