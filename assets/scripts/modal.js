@@ -32,8 +32,8 @@ const closeModal = document.querySelector('.closeModal');
 
 modifier.addEventListener('click', () => {
   modal.style.display = 'block';
-
 });
+
 
 // Fermer la modal
 closeModal.addEventListener('click', () => {
@@ -46,44 +46,52 @@ function trash() {
   const imageElements = document.querySelectorAll('.figureModal img');
 
   imageElements.forEach(imageElement => {
-    const figureElementModal = imageElement.closest('.figureModal'); // Chercher l'élément figureModal parent de l'image
-    const deleteElement = figureElementModal.querySelector('.deleteElement'); // Chercher deleteElement dans figureModal
+    const figures = document.querySelectorAll('.gallery figure'); // Recupéré les éléments sur le site
+    const deleteElements = document.querySelectorAll('.deleteElement'); // Chercher deleteElement dans figureModal
 
-    deleteElement.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      // récupérer l'id de l'image
-      const id = imageElement.dataset.id;
+    deleteElements.forEach((deleteElement, index) => {  //index permet d'avoir chaque élement de façon individuel
 
-      // récupérer les différents éléments pour fetch et la réinitialition de la page
-      const gallery = document.querySelector(".gallerie");
-      const galleryModal = document.querySelector('.galleryModal');
-      const token = localStorage.getItem('token');
-      
+      deleteElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // récupérer l'id de l'image ainsi que l'element parent à supprimer
+        const id = deleteElement.dataset.id;
+        const figureModal = deleteElement.parentNode;
 
-      fetch(`http://localhost:5678/api/works/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Erreur de suppression');
-        }
-        // Pas besoin de réponse, Delete n'en renvoit pas
-      })
-      .then(() => {
-        // Supprimer l'élément .figureModal parent de l'image
-        imageElement.closest('.figureModal').remove();
-        gallery.innerHTML = "";
-        galleryModal.innerHTML = "";
-        apiWorks(); // fait appel aux images de l'api
-      })
-      .catch((error) => {
-        console.error('Erreur :', error);
+        const token = localStorage.getItem('token');
+        
+        fetch(`http://localhost:5678/api/works/${id}`, {
+          method: 'DELETE',
+          headers: {
+              "Accept": "application/json",
+              'Authorization': `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Erreur de suppression');
+            }
+            // Supprimer l'élément .figureModal parent de l'image
+            figureModal.remove();
+            
+            // Ajout d'une condition pour la suppression de l'image sur le site
+            if (figures[index]) {
+                figures[index].remove();
+            }
+            // Mettre à jour le site internet ainsi que la modal, sans rechargement de la page
+            const gallery = document.querySelector(".gallerie");
+            const galleryModal = document.querySelector('.galleryModal');
+            
+            gallery.innerHTML = "";
+            galleryModal.innerHTML = "";
+            apiWorks(); // fait appel aux images de l'api
+
+        })
+        .catch((error) => {
+            console.error('Erreur :', error);
+        });
       });
-    });
+    })
   });
 }
 

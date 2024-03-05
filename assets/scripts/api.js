@@ -1,6 +1,6 @@
 // On va appeler l'API pour les éléments photos et légendes
   
-let response;
+let responseAPIWorks;  // Il faut le mettre à part de la fonction "fetch" pour qu'on puisse l'utiliser dans d'autres fonctions
 let responseCategories;
 
 
@@ -10,12 +10,11 @@ function apiWorks() {
       if (!responseFetch.ok) {
         throw new Error('La requête a échoué');
       }
-
-      const response = await responseFetch.json();
-      console.log(response);
+      responseAPIWorks = await responseFetch.json();
+      console.log(responseAPIWorks);
 
       // Appel de la fonction pour créer les éléments à partir des données
-      elementsAPI(response);
+      elementsAPI(responseAPIWorks);
       addPhotoAPI();
       trash()
     })
@@ -23,8 +22,6 @@ function apiWorks() {
       console.error('Erreur de fetch:', error);
     });
 }
-
-
 
 apiWorks(); // Pourquoi la mettre seule ? pour charger les données depuis l'API et initialiser l'interface
 
@@ -45,5 +42,3 @@ fetch("http://localhost:5678/api/categories")
   .catch(error => {
     console.error('Erreur categories');
   });
-
-

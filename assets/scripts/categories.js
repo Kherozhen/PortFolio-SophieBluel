@@ -29,17 +29,17 @@ function categoriesAPI(categories) {
   btnFiltres.forEach(button => {                                                  // Faire une boucle pour cibler tous les boutons
     button.addEventListener("click", () => {                                      // Faire en sorte que qqc se passe au click de la souris
       const btnId = button.dataset.id;                                            // Grâce à la fonction dataset on va aller recupérer "id" sur l'API
-      let filtre = response.filter(function(element) {                            // On utilise "let" car le filtre va varier suivant les boutons
+      let filtre = responseAPIWorks.filter(function(element) {                            // On utilise "let" car le filtre va varier suivant les boutons
         return element.categoryId == btnId;                                       // "return" est pour avoir une réponse, "==" => veut dire "équivalent"
       })
       gallery.innerHTML = "";                                                     // => sert à reset la page toujours sans rechargement de la page
       elementsAPI(filtre);
+      console.log(btnFiltres);
     })
-  })
-
+  });
     btnAll.addEventListener('click', () => {                                      // Permet de reset la page et de afficher tous les éléments sans chargement de la page
       gallery.innerHTML = "";
-      return elementsAPI(response);
+      return elementsAPI(responseAPIWorks);
     })
 }
 

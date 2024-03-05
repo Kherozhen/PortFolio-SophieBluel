@@ -1,15 +1,3 @@
-/* Ajout du bouton "Modifier" */
-.modifier {
-	position: absolute;
-	right : 360px;
-	top : 11px;
-}
-.modifier a {
-	text-decoration: none;
-	color : black;
-	padding-left: 8px;
-}
-
 /* Première modal*/
 
 .modal {
@@ -216,7 +204,7 @@
     height: 50px;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.modalPhoto .modalAddPhoto .addPhoto form button {
+.modalPhoto .modalAddPhoto .addPhoto form .okForAdd {
     width: 50%;
     align-self: center;
 	border: none;
