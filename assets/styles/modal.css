@@ -151,20 +151,24 @@
 
 .modalPhoto .modalAddPhoto .addPhoto .previewPhoto {
     background-color: #E8F1F6;
+    height: 170px;
+    padding: 20px;
+}
+
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .uploadImg {
     display: flex;
     flex-direction: column;
-    padding: 20px;
     gap: 10px;
-    height: 170px;
+    
 }
-.modalPhoto .modalAddPhoto .addPhoto .previewPhoto i {
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .uploadImg i {
     color: #CBD6DC;
     font-size: 76px;
 }
-.modalPhoto .modalAddPhoto .addPhoto .previewPhoto input {
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .uploadImg input {
     display: none;
 }
-.modalPhoto .modalAddPhoto .addPhoto .previewPhoto button {
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .uploadImg button {
     cursor: pointer;
     color: #306685;
     font-size: 14px;
@@ -177,16 +181,27 @@
     border: none;
     border-radius: 25px;
 }
-.modalPhoto .modalAddPhoto .addPhoto.previewPhoto span {
+.modalPhoto .modalAddPhoto .addPhoto.previewPhoto .uploadImg span {
     font-size: 10px;
 }
 
-.modalPhoto .modalAddPhoto .addPhoto .previewPhoto img {
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .divApercu {
+    height: 100%;
+    position: relative;
+}
+
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .divApercu img {
     height: 100%;
     object-fit: cover;
-    width: 30%;
-    align-self: center;
 }
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .divApercu .resetImage {
+font-size: 20px;
+    position: absolute;
+    right: -4px;
+    top: 152px;
+    color: #aaa;
+    cursor: pointer;
+}    
 .modalPhoto .modalAddPhoto .addPhoto form {
     padding-top: 20px;
     display: flex;

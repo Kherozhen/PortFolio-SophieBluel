@@ -68,24 +68,16 @@ function trash() {
           },
         })
         .then((response) => {
-            if (!response.ok) {
-                throw new Error('Erreur de suppression');
-            }
-            // Supprimer l'élément .figureModal parent de l'image
-            figureModal.remove();
-            
-            // Ajout d'une condition pour la suppression de l'image sur le site
-            if (figures[index]) {
-                figures[index].remove();
-            }
-            // Mettre à jour le site internet ainsi que la modal, sans rechargement de la page
-            const gallery = document.querySelector(".gallerie");
-            const galleryModal = document.querySelector('.galleryModal');
-            
-            gallery.innerHTML = "";
-            galleryModal.innerHTML = "";
-            apiWorks(); // fait appel aux images de l'api
-
+          if (!response.ok) {
+              throw new Error('Erreur de suppression');
+          }
+          // Supprimer l'élément .figureModal parent de l'image
+          figureModal.remove();
+          
+          // Ajout d'une condition pour la suppression de l'image sur le site
+          if (figures[index]) {
+              figures[index].remove();
+          }
         })
         .catch((error) => {
             console.error('Erreur :', error);
@@ -109,15 +101,15 @@ const returnModal = document.querySelector('.return');
 // Ouverture de la modal
 
 btnAjoutPhoto.addEventListener('click', () => {
-    modalPhoto.style.display = 'block';
-    modal.style.display = 'none';
+  modalPhoto.style.display = 'block';
+  modal.style.display = 'none';
 });
 
 // Fermeture de la modal
 
 closeModalPhoto.addEventListener('click', () => {
-    modalPhoto.style.display ='none';
-    resetModalPhoto();
+  modalPhoto.style.display ='none';
+  resetModalPhoto();
 });
 
 // Ajouter une image grâce à la modal
@@ -125,26 +117,14 @@ closeModalPhoto.addEventListener('click', () => {
 const selectImage = document.querySelector('.selectImage')
 const btnUpload = document.querySelector('.upload');
 let previewPhoto = document.querySelector('.previewPhoto');
+const uploadImg = document.querySelector('.uploadImg');
+
 
 btnUpload.addEventListener('click', () => {
   selectImage.click ();
 });
 
-returnModal.addEventListener('click', () => {
-  resetModalPhoto();
-  modalPhoto.style.display = 'none';
-  modal.style.display = 'block';
-  
-});
 
-// Reset la modal quand on la ferme
-
-function resetModalPhoto() {
-  selectImage.value = ''; // Reset input image
-  titleImage.value = ''; // Reset input titre
-  selectCategorie.selectedIndex = 0; // Reset categories
-  okForAdd.disabled = true; // Désactive le bouton
-};
 
 ////////////////////////////////
 
@@ -156,24 +136,41 @@ function afficherImage() {
   // Vérifier si un fichier a été sélectionné
 
   if (file.length > 0) {
-      let reader = new FileReader();
+    let reader = new FileReader();
       reader.onload = function (event) {
 
-          // Créer un nouvel élément img pour afficher l'aperçu de l'image
+        // Créer un nouvel élément img pour afficher l'aperçu de l'image
+        const divApercu = document.createElement('div');
+        divApercu.classList.add('divApercu');
+        previewPhoto.appendChild(divApercu);
 
-          let appercuImage = document.createElement('img');
-          appercuImage.setAttribute('src', event.target.result); // Définir l'URL de l'image
-          
-          // Vider la balise .previewPhoto pour placer l'appercu de l'image
+        let apercuImage = document.createElement('img');
+        apercuImage.classList.add('apercuImg');
+        divApercu.appendChild(apercuImage);
+        apercuImage.setAttribute('src', event.target.result); // Définir l'URL de l'image
 
-          previewPhoto.innerHTML = "";
-          previewPhoto.appendChild(appercuImage);
+        // Vider la balise .previewPhoto pour placer l'apercu de l'image
+        uploadImg.style.display = 'none';
+        divApercu.style.display ='block';
+
+        // Créer un élement pour reset l'image en cas d'erreur
+        const resetImage = document.createElement('span');
+        resetImage.innerHTML = '<i class="fa-solid fa-rotate-right"></i>';
+        resetImage.classList.add('resetImage');
+        divApercu.appendChild(resetImage);
+        
+        resetImage.addEventListener('click', () => {
+          selectImage.value = ''; // Reset input image
+          // Supprimer l'élément 
+          divApercu.remove();
+          uploadImg.style.display = 'flex';
+        });   
       };
 
-      // Lire le contenu du fichier en tant qu'URL de données
-      reader.readAsDataURL(file[0]);
-    }
-  } 
+    // Lire le contenu du fichier en tant qu'URL de données
+    reader.readAsDataURL(file[0]);
+  }
+};
 
 // Activer le bouton "ajouter photo" lors que tous les champs sont remplis
 
@@ -202,12 +199,18 @@ selectImage.addEventListener('change', verification); // change est pour dire qu
 titleImage.addEventListener('input', verification); // input est pour dire qu'il y a eu une saisie/collage/coupe
 selectCategorie.addEventListener('change', verification); 
 
+
+// Reset la modal quand on la ferme
+const divApercu = document.querySelector('.divApercu');
+
+
+
 // Utiliser la requête POST pour mettre une photo sur le site
 function addPhotoAPI() {
   okForAdd.addEventListener('click', (e) => {
     e.preventDefault(); // pour éviter le rechargement de la page
 
-    const gallery = document.querySelector(".gallerie");
+    const gallery = document.querySelector(".gallery");
     const galleryModal = document.querySelector('.galleryModal');
     const token = localStorage.getItem('token');
     const form = document.querySelector('form');
@@ -235,3 +238,18 @@ function addPhotoAPI() {
     })
   });
 }
+
+// Reset et retour en arrière
+
+returnModal.addEventListener('click', () => {
+  modalPhoto.style.display = 'none';
+  modal.style.display = 'block';
+  resetModalPhoto();
+});
+
+function resetModalPhoto() {
+  selectImage.value = ''; // Reset input image 
+  titleImage.value = ''; // Reset input titre
+  selectCategorie.selectedIndex = 0; // Reset categories
+  okForAdd.disabled = true; // Désactive le bouton
+};

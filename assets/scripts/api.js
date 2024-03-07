@@ -16,7 +16,7 @@ function apiWorks() {
       // Appel de la fonction pour créer les éléments à partir des données
       elementsAPI(responseAPIWorks);
       addPhotoAPI();
-      trash()
+      trash();
     })
     .catch(error => {
       console.error('Erreur de fetch:', error);
