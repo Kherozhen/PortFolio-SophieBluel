@@ -185,17 +185,17 @@
     font-size: 10px;
 }
 
-.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .divApercu {
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .imgApercu {
     height: 100%;
     position: relative;
 }
 
-.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .divApercu img {
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .imgApercu img {
     height: 100%;
     object-fit: cover;
 }
-.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .divApercu .resetImage {
-font-size: 20px;
+.modalPhoto .modalAddPhoto .addPhoto .previewPhoto .imgApercu .resetImage {
+    font-size: 20px;
     position: absolute;
     right: -4px;
     top: 152px;
